@@ -39,6 +39,7 @@ import {
   UserInfo,
   UserList,
   UserRating,
+  Wishlist,
 } from '~/screens';
 
 import { colors } from '~/styles';
@@ -143,6 +144,10 @@ export const AppNavigator = () => {
             <Stack.Screen
               name={SCREENS.CHATBOT}
               component={Chatbot}
+            />
+            <Stack.Screen
+              name={SCREENS.WISHLIST}
+              component={Wishlist}
             />
           </Stack.Group>
         )}

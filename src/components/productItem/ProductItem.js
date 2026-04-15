@@ -3,11 +3,14 @@ import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Button, Pressable, SaveCard, Text } from '~/components';
+
+import { Button, IconButton, Pressable, SaveCard, Text } from '~/components';
 import { SAVE_CARD_HEIGHT, SCREEN_WIDTH } from '~/constants';
 import { colors } from '~/styles';
 import { getPercentPriceReduction, moneyFormat } from '~/utils';
+import { toggleWishlist } from '~/redux/slices';
 
 const ITEM_WIDTH = SCREEN_WIDTH * 0.5 - 4;
 const IMAGE_SIZE = ITEM_WIDTH;
@@ -18,6 +21,14 @@ export const ProductItem = (props) => {
 
   const saveMoney = () => {
     return data.priceOld - data.price;
+  };
+
+  const dispatch = useDispatch();
+  const wishlistItems = useSelector((state) => state.wishlist.items || []);
+  const isFavorite = wishlistItems.some((item) => item.id === data.id);
+
+  const handleToggleWishlist = () => {
+    dispatch(toggleWishlist(data));
   };
 
   const isOutOfStock = data?.outOfStock === true;
@@ -35,6 +46,13 @@ export const ProductItem = (props) => {
     <Pressable onPress={onDetail} style={styles.container}>
       <View>
         <Image source={{ uri: data?.image }} style={[styles.image, isOutOfStock && styles.imageOutOfStock]} />
+        <IconButton
+          name={isFavorite ? 'heart' : 'heart-outline'}
+          size='small'
+          color={isFavorite ? colors.error : colors.tertiaryText}
+          style={styles.favoriteButton}
+          onPress={handleToggleWishlist}
+        />
         {isOutOfStock ? (
           <View style={styles.outOfStockBadge}>
             <Text style={styles.outOfStockText}>{t('outOfStock') || 'Hết hàng'}</Text>
@@ -92,6 +110,14 @@ const styles = StyleSheet.create({
   save: {
     position: 'absolute',
     top: -SAVE_CARD_HEIGHT,
+  },
+  favoriteButton: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    backgroundColor: '#ffffffEE',
+    borderRadius: 16,
+    padding: 4,
   },
   outOfStockBadge: {
     position: 'absolute',

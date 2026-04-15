@@ -56,6 +56,13 @@ export const Account = () => {
           },
         },
         {
+          icon: 'heart',
+          title: t('wishlist') || 'Danh sách yêu thích',
+          onPress: () => {
+            navigation.navigate(SCREENS.WISHLIST);
+          },
+        },
+        {
           icon: 'language',
           title: t('changeLanguage'),
           bottomDivider: false,

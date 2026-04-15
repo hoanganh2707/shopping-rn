@@ -9,7 +9,7 @@ import {
 
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { categoryApi, productApi } from '~/apis';
 import { images } from '~/assets';
@@ -36,6 +36,7 @@ export const Home = () => {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const recentlyViewedItems = useSelector((state) => state.recentlyViewed?.items || []);
 
   const [categories, setCategories] = useState([]);
 
@@ -117,6 +118,30 @@ export const Home = () => {
               />
             )}
           />
+          {recentlyViewedItems.length > 0 && (
+            <ImageBackground
+              style={styles.imageBackground}
+              source={BACKGROUNDS[BACKGROUNDS.length - 1]}>
+              <View style={styles.section}>
+                <Text variant='headlineSmall' style={styles.header}>
+                  {t('recentlyViewed') || 'Sản phẩm vừa xem'}
+                </Text>
+              </View>
+              <FlatList
+                contentContainerStyle={styles.productList}
+                showsHorizontalScrollIndicator={false}
+                horizontal
+                data={recentlyViewedItems}
+                renderItem={({ item }) => (
+                  <ProductItem
+                    data={item}
+                    onDetail={() => handleProductDetail(item)}
+                    onAddToCart={() => handleAddToCart(item)}
+                  />
+                )}
+              />
+            </ImageBackground>
+          )}
           <SectionList
             scrollEnabled={false}
             sections={data}

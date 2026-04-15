@@ -27,7 +27,7 @@ import {
   moneyFormat,
   showMessageAddToCart,
 } from '~/utils';
-import { cartActions } from '~/redux';
+import { cartActions, addViewedProduct } from '~/redux';
 
 const IMAGE_WIDTH = SCREEN_WIDTH * 0.5;
 
@@ -50,6 +50,7 @@ export const ProductDetail = () => {
     const response = await productApi.getOne(id);
     if (response?.data) {
       setData(response.data);
+      dispatch(addViewedProduct(response.data));
     }
   };
 

@@ -157,4 +157,12 @@ export const icons = {
     name: 'logo-google',
     type: 'ionicon',
   },
+  heart: {
+    name: 'heart',
+    type: 'ionicon',
+  },
+  'heart-outline': {
+    name: 'heart-outline',
+    type: 'ionicon',
+  },
 };

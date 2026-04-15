@@ -20,3 +20,4 @@ export * from './userInfo';
 export * from './userRating';
 export * from './users';
 export * from './myCommentList';
+export * from './wishlist';
