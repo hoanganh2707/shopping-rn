@@ -8,3 +8,5 @@ export * from './ratingApi';
 export * from './userApi';
 export * from './chartApi';
 export * from './emailApi';
+export * from './couponApi';
+export * from './bannerApi';

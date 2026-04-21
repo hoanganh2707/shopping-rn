@@ -1,24 +1,27 @@
 /**
  * Colors dùng chung cho toàn app
+ * Hỗ trợ Light/Dark mode
  */
-export const colors = {
+
+export const lightColors = {
   primary: 'rgb(255, 165, 0)',
   secondary: 'skyblue',
   text: 'black',
+  primaryText: '#1a1a1a',
   secondaryText: 'rgb(67, 70, 87)',
   tertiaryText: 'rgb(130, 134, 158)',
   placeholderText: '#82869E',
-  disabledText: '',
-  link: '',
+  disabledText: '#aaa',
+  link: '#1a73e8',
   cursor: 'rgb(20, 53, 195)',
   selection: '',
   border: '#ebedf0',
   divider: '#ebedf0',
   notification: '#da4343',
   error: '#da4343',
-  warning: '',
-  info: '',
-  success: '',
+  warning: '#f5a623',
+  info: '#2196F3',
+  success: '#4caf50',
   background: '#f2f2f6',
   surface: '#ffffff',
   backdrop: 'rgba(0,0,0,0.5)',
@@ -28,4 +31,45 @@ export const colors = {
   messageBackground: 'rgba(0,0,0,0.75)',
   searchBackground: '#f6f6f6',
   star: 'orange',
+  card: '#ffffff',
+  gradient1: '#FF9500',
+  gradient2: '#FF6B00',
+  shadowColor: '#000',
 };
+
+export const darkColors = {
+  primary: 'rgb(255, 179, 50)',
+  secondary: '#5ca7c4',
+  text: '#e0e0e0',
+  primaryText: '#f0f0f0',
+  secondaryText: '#b0b3c0',
+  tertiaryText: '#8a8ea0',
+  placeholderText: '#6e7186',
+  disabledText: '#555',
+  link: '#64b5f6',
+  cursor: '#5c7cfa',
+  selection: '',
+  border: '#2c2c3a',
+  divider: '#2c2c3a',
+  notification: '#ef5350',
+  error: '#ef5350',
+  warning: '#ffa726',
+  info: '#42a5f5',
+  success: '#66bb6a',
+  background: '#121218',
+  surface: '#1e1e2a',
+  backdrop: 'rgba(0,0,0,0.7)',
+  placeholderImage: '#2a2a36',
+  disabledInputBackground: '#252530',
+  light: '#ffffff',
+  messageBackground: 'rgba(0,0,0,0.85)',
+  searchBackground: '#252530',
+  star: '#ffa726',
+  card: '#1e1e2a',
+  gradient1: '#FF9500',
+  gradient2: '#FF6B00',
+  shadowColor: '#000',
+};
+
+// Default export for backward compatibility
+export const colors = lightColors;

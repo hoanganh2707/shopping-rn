@@ -2,22 +2,28 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { colors } from '~/styles';
+import { useTheme } from '~/config/ThemeContext';
 import { Divider } from '../divider';
 import { Icon } from '../icon';
 import { Pressable } from '../pressable';
 import { Text } from '../text';
 
 export const ListItem = (props) => {
-  const { icon, title, onPress, bottomDivider } = props;
+  const { icon, title, onPress, bottomDivider, rightComponent } = props;
+  const { colors } = useTheme();
+
   return (
     <>
-      <Pressable onPress={onPress} style={styles.container}>
+      <Pressable onPress={onPress} style={[styles.container, { backgroundColor: colors.surface }]}>
         <Icon color={colors.tertiaryText} name={icon} />
         <View style={[styles.content]}>
-          <Text numberOfLines={1}>{title}</Text>
+          <Text numberOfLines={1} style={{ color: colors.primaryText || colors.text }}>
+            {title}
+          </Text>
         </View>
-        <Icon color={colors.tertiaryText} size={'small'} name={'arrow-next'} />
+        {rightComponent || (
+          <Icon color={colors.tertiaryText} size={'small'} name={'arrow-next'} />
+        )}
       </Pressable>
       {bottomDivider && <Divider style={styles.divider} />}
     </>
@@ -29,7 +35,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 16,
     paddingVertical: 12,
-    backgroundColor: colors.surface,
     alignItems: 'center',
   },
   content: {
@@ -46,4 +51,5 @@ ListItem.propTypes = {
   title: PropTypes.string,
   onPress: PropTypes.func,
   bottomDivider: PropTypes.bool,
+  rightComponent: PropTypes.element,
 };

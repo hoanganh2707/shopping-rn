@@ -13,6 +13,7 @@ import { LoadingOverlay } from '~/components';
 import { useDeepLinking } from '~/hooks/useDeepLinking';
 import { AppNavigator } from '~/navigators';
 import { persistor, selectIsLoading, store } from '~/redux';
+import { ThemeProvider, useTheme } from '~/config/ThemeContext';
 import '~/translations';
 import { ignoreWarnings } from '~/utils';
 
@@ -22,6 +23,7 @@ const AppContainer = () => {
   const { t, i18n } = useTranslation();
   const isLoading = useSelector(selectIsLoading);
   const lang = useSelector((state) => state.app.lang);
+  const { isDark, colors } = useTheme();
 
   // Khởi tạo deep linking
   useDeepLinking();
@@ -31,10 +33,10 @@ const AppContainer = () => {
   }, [lang]);
 
   return (
-    <GestureHandlerRootView style={styles.container}>
+    <GestureHandlerRootView style={[styles.container, { backgroundColor: colors.background }]}>
       <SafeAreaProvider>
         <StatusBar
-          barStyle='dark-content'
+          barStyle={isDark ? 'light-content' : 'dark-content'}
           backgroundColor='transparent'
           translucent
         />
@@ -52,7 +54,9 @@ export default function App() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <AppContainer />
+        <ThemeProvider>
+          <AppContainer />
+        </ThemeProvider>
       </PersistGate>
     </Provider>
   );

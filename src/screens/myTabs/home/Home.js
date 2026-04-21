@@ -22,7 +22,7 @@ import { Banner, CategoryItem, ProductItem, StickyHeader } from './components';
 const ITEM_GAP = 16;
 const NUM_COLUMS = 5;
 
-const PRODUCT_ITEM_GAP = 8;
+const PRODUCT_ITEM_GAP = 0;
 
 const BACKGROUNDS = [
   images.background1,
@@ -129,9 +129,8 @@ export const Home = () => {
               </View>
               <FlatList
                 contentContainerStyle={styles.productList}
-                showsHorizontalScrollIndicator={false}
-                horizontal
-                data={recentlyViewedItems}
+                scrollEnabled={false}
+                data={recentlyViewedItems.slice(0, 3)}
                 renderItem={({ item }) => (
                   <ProductItem
                     data={item}
@@ -173,9 +172,8 @@ export const Home = () => {
                   </View>
                   <FlatList
                     contentContainerStyle={styles.productList}
-                    showsHorizontalScrollIndicator={false}
-                    horizontal
-                    data={section.data}
+                    scrollEnabled={false}
+                    data={section.data.slice(0, 4)}
                     renderItem={({ item }) => {
                       return (
                         <ProductItem

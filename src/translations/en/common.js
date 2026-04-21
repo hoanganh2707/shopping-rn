@@ -194,17 +194,92 @@ export const common = {
   typeMessage: 'Type a message...',
   trackOrder: 'Track Order',
   myOrders: 'My Orders',
-  orderCode: 'Order Code',
   orderDate: 'Order Date',
   totalAmount: 'Total Amount',
   viewOrderDetail: 'View Detail',
   outOfStock: 'Out of Stock',
-  typeMessage: 'Type a message...',
-  products: 'Products',
   noProductsFound: 'No products found',
 
   // Google Auth
   signInWithGoogle: 'Sign in with Google',
   signUpWithGoogle: 'Sign up with Google',
   or: 'Or',
+
+  // === NEW FEATURES ===
+
+  // Dark Mode
+  darkMode: 'Dark Mode',
+
+  // Wishlist
+  wishlist: 'Wishlist',
+
+  // Recently Viewed
+  recentlyViewed: 'Recently Viewed',
+
+  // Address Book
+  addressBook: 'Address Book',
+  addNewAddress: 'Add New Address',
+  editAddress: 'Edit Address',
+  addressLabel: 'Label (e.g. Home, Office)',
+  noAddresses: 'No addresses saved yet',
+  setAsDefault: 'Set as Default',
+  default: 'Default',
+  selectFromSaved: 'Select from saved addresses',
+
+  // Coupon / Voucher
+  couponCode: 'Coupon Code',
+  enterCouponCode: 'Enter coupon code',
+  applyCoupon: 'Apply',
+  removeCoupon: 'Remove',
+  couponApplied: 'Coupon applied successfully',
+  couponRemoved: 'Coupon removed',
+  discount: 'Discount',
+  subtotal: 'Subtotal',
+  total: 'Total',
+  availableCoupons: 'Available Coupons',
+  invalidCoupon: 'Invalid coupon code',
+
+  // Reward Points
+  rewardPoints: 'Reward Points',
+  yourPoints: 'Your Points',
+  earnRate: 'Earn Rate',
+  redeemRate: 'Redeem Rate',
+  point: 'point',
+  order: 'order',
+  howToEarn: 'How to Earn',
+  earnByPurchase: 'Purchase: earn 1% of order value as points',
+  earnByReview: 'Rate a product: +10 points',
+  earnByComment: 'Comment on a product: +5 points',
+  pointHistory: 'Point History',
+  noPointHistory: 'No point history yet',
+  useRewardPoints: 'Use Reward Points',
+  pointsDiscount: 'Points Discount',
+
+  // Order Tracking
+  deliveryStatus: 'Delivery Status',
+  estimatedDelivery: 'Estimated Delivery',
+  currentStatus: 'Current Status',
+
+  // Filtering & Sorting
+  filter: 'Filter',
+  sort: 'Sort',
+  priceRange: 'Price Range',
+  minPrice: 'Min Price',
+  maxPrice: 'Max Price',
+  starRating: 'Star Rating',
+  starsAndUp: 'stars & up',
+  sortByPriceLow: 'Price: Low to High',
+  sortByPriceHigh: 'Price: High to Low',
+  sortByNewest: 'Newest',
+  sortByBestSelling: 'Best Selling',
+  applyFilter: 'Apply',
+  resetFilter: 'Reset',
+  results: 'results',
+
+  // Flash Sale
+  flashSale: 'Flash Sale',
+  endsIn: 'Ends in',
+
+  // Recommendations
+  recommendedForYou: 'Recommended for You',
 };

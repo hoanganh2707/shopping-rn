@@ -8,6 +8,9 @@ import {
   cartReducer,
   wishlistReducer,
   recentlyViewedReducer,
+  couponReducer,
+  rewardReducer,
+  addressReducer,
 } from './slices';
 
 const persistConfig = {
@@ -34,6 +37,9 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   wishlist: wishlistReducer,
   recentlyViewed: recentlyViewedReducer,
+  coupon: couponReducer,
+  reward: rewardReducer,
+  address: addressReducer,
 });
 
 export const persistedReducer = persistReducer(persistConfig, rootReducer);

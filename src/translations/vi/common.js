@@ -194,17 +194,92 @@ export const common = {
   typeMessage: 'Nhập tin nhắn...',
   trackOrder: 'Theo dõi đơn hàng',
   myOrders: 'Đơn hàng của tôi',
-  orderCode: 'Mã đơn hàng',
   orderDate: 'Ngày đặt',
   totalAmount: 'Tổng tiền',
   viewOrderDetail: 'Xem chi tiết',
   outOfStock: 'Hết hàng',
-  typeMessage: 'Nhập tin nhắn...',
-  products: 'Sản phẩm',
   noProductsFound: 'Không tìm thấy sản phẩm nào',
 
   // Google Auth
   signInWithGoogle: 'Đăng nhập bằng Google',
   signUpWithGoogle: 'Đăng ký bằng Google',
   or: 'Hoặc',
+
+  // === NEW FEATURES ===
+
+  // Dark Mode
+  darkMode: 'Chế độ tối',
+
+  // Wishlist
+  wishlist: 'Danh sách yêu thích',
+
+  // Recently Viewed
+  recentlyViewed: 'Sản phẩm vừa xem',
+
+  // Address Book
+  addressBook: 'Sổ địa chỉ',
+  addNewAddress: 'Thêm địa chỉ mới',
+  editAddress: 'Sửa địa chỉ',
+  addressLabel: 'Nhãn (VD: Nhà riêng, Công ty)',
+  noAddresses: 'Chưa có địa chỉ nào',
+  setAsDefault: 'Đặt làm mặc định',
+  default: 'Mặc định',
+  selectFromSaved: 'Chọn từ địa chỉ đã lưu',
+
+  // Coupon / Voucher
+  couponCode: 'Mã giảm giá',
+  enterCouponCode: 'Nhập mã giảm giá',
+  applyCoupon: 'Áp dụng',
+  removeCoupon: 'Xoá mã',
+  couponApplied: 'Đã áp dụng mã giảm giá',
+  couponRemoved: 'Đã xoá mã giảm giá',
+  discount: 'Giảm giá',
+  subtotal: 'Tạm tính',
+  total: 'Tổng cộng',
+  availableCoupons: 'Mã giảm giá có sẵn',
+  invalidCoupon: 'Mã giảm giá không hợp lệ',
+
+  // Reward Points
+  rewardPoints: 'Điểm thưởng',
+  yourPoints: 'Điểm của bạn',
+  earnRate: 'Tỷ lệ tích',
+  redeemRate: 'Quy đổi',
+  point: 'điểm',
+  order: 'đơn hàng',
+  howToEarn: 'Cách tích điểm',
+  earnByPurchase: 'Mua hàng: nhận 1% giá trị đơn hàng thành điểm',
+  earnByReview: 'Đánh giá sản phẩm: +10 điểm',
+  earnByComment: 'Bình luận sản phẩm: +5 điểm',
+  pointHistory: 'Lịch sử điểm',
+  noPointHistory: 'Chưa có lịch sử điểm',
+  useRewardPoints: 'Sử dụng điểm thưởng',
+  pointsDiscount: 'Giảm từ điểm',
+
+  // Order Tracking
+  deliveryStatus: 'Trạng thái giao hàng',
+  estimatedDelivery: 'Dự kiến giao',
+  currentStatus: 'Trạng thái hiện tại',
+
+  // Filtering & Sorting
+  filter: 'Lọc',
+  sort: 'Sắp xếp',
+  priceRange: 'Khoảng giá',
+  minPrice: 'Giá thấp nhất',
+  maxPrice: 'Giá cao nhất',
+  starRating: 'Đánh giá sao',
+  starsAndUp: 'sao trở lên',
+  sortByPriceLow: 'Giá thấp đến cao',
+  sortByPriceHigh: 'Giá cao đến thấp',
+  sortByNewest: 'Mới nhất',
+  sortByBestSelling: 'Bán chạy nhất',
+  applyFilter: 'Áp dụng',
+  resetFilter: 'Đặt lại',
+  results: 'kết quả',
+
+  // Flash Sale
+  flashSale: 'Flash Sale',
+  endsIn: 'Kết thúc sau',
+
+  // Recommendations
+  recommendedForYou: 'Gợi ý cho bạn',
 };

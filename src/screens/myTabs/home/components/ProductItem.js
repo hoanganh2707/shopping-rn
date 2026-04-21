@@ -4,68 +4,63 @@ import { Image, StyleSheet, View } from 'react-native';
 
 import { useTranslation } from 'react-i18next';
 
-import { Button, Pressable, SaveCard, Text } from '~/components';
-import { SAVE_CARD_HEIGHT, SCREEN_WIDTH } from '~/constants';
-import { colors } from '~/styles';
+import { Pressable, Text, Icon } from '~/components';
+import { useTheme } from '~/config/ThemeContext';
 import { getPercentPriceReduction, moneyFormat } from '~/utils';
-
-const ITEM_WIDTH = SCREEN_WIDTH * 0.5;
-const IMAGE_SIZE = ITEM_WIDTH;
 
 export const ProductItem = (props) => {
   const { t } = useTranslation();
   const { data, onDetail, onAddToCart } = props;
-
-  const saveMoney = () => {
-    return data.priceOld - data.price;
-  };
+  const { colors, isDark } = useTheme();
 
   const isOutOfStock = data?.outOfStock === true;
 
-  // Debug log
-  console.log('🏠 Home ProductItem:', {
-    id: data?.id?.slice(-6),
-    name: data?.name?.slice(0, 20),
-    outOfStock: data?.outOfStock,
-    isOutOfStock: isOutOfStock,
-  });
-
   return (
-    <Pressable onPress={onDetail} style={styles.container}>
-      <View>
-        <Image source={{ uri: data?.image }} style={[styles.image, isOutOfStock && styles.imageOutOfStock]} />
-        {isOutOfStock ? (
-          <View style={styles.outOfStockBadge}>
-            <Text style={styles.outOfStockText}>{t('outOfStock') || 'Hết hàng'}</Text>
-          </View>
-        ) : (
-          <SaveCard style={styles.save} money={saveMoney()} />
-        )}
-        <Text numberOfLines={2} style={styles.name}>
-          {data?.name}
-        </Text>
-      </View>
-      <View>
-        <Text style={styles.price}>
-          {data?.price && moneyFormat(data?.price)}
-        </Text>
-        <Text>
-          <Text style={styles.priceOld}>
-            {data?.priceOld && moneyFormat(data?.priceOld)}
-          </Text>
-          <Text style={styles.percent}>
-            {getPercentPriceReduction(data?.price, data?.priceOld)}
-          </Text>
-        </Text>
-        <Button
-          onPress={onAddToCart}
-          block
-          size='small'
-          variant='outline'
-          title={isOutOfStock ? (t('outOfStock') || 'Hết hàng') : t('aadToCart')}
-          style={styles.button}
-          disabled={isOutOfStock}
+    <Pressable onPress={onDetail} style={[styles.container, { borderBottomColor: colors.border }]}>
+      <View style={styles.imageWrapper}>
+        <Image 
+          source={{ uri: data?.image }} 
+          style={[styles.image, isOutOfStock && styles.imageOutOfStock, { backgroundColor: isDark ? '#333' : '#F5F5F5' }]} 
         />
+        {isOutOfStock && (
+          <View style={[styles.outOfStockBadge, { backgroundColor: colors.error + 'DD' }]}>
+            <Text style={styles.outOfStockText}>Hết</Text>
+          </View>
+        )}
+      </View>
+      
+      <View style={styles.infoContainer}>
+        <View>
+          <Text style={[styles.name, { color: colors.primaryText || colors.text }]} numberOfLines={2}>
+            {data?.name}
+          </Text>
+          {data?.priceOld && data?.price < data?.priceOld && (
+            <Text style={styles.oldPrice}>
+              <Text style={{textDecorationLine: 'line-through'}}>{moneyFormat(data?.priceOld)}</Text>
+              <Text style={[styles.percent, { color: colors.error }]}>
+                {'  -' + getPercentPriceReduction(data?.price, data?.priceOld)}
+              </Text>
+            </Text>
+          )}
+        </View>
+        
+        <View style={styles.bottomRow}>
+          <Text style={[styles.price, { color: colors.primary }]}>
+             {data?.price && moneyFormat(data?.price)}
+          </Text>
+
+          <Pressable 
+            disabled={isOutOfStock} 
+            onPress={onAddToCart} 
+            style={[
+              styles.addButton, 
+              isOutOfStock && styles.addButtonDisabled, 
+              { backgroundColor: isOutOfStock ? colors.disabled || '#999' : colors.primary }
+            ]}
+          >
+            <Icon name="plus" size={16} color="#fff" />
+          </Pressable>
+        </View>
       </View>
     </Pressable>
   );
@@ -73,56 +68,83 @@ export const ProductItem = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: ITEM_WIDTH,
-    backgroundColor: colors.surface,
-    padding: 12,
-    borderRadius: 4,
-    justifyContent: 'space-between',
+    flexDirection: 'row',
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    backgroundColor: 'transparent',
+  },
+  imageWrapper: {
+    position: 'relative',
+    marginRight: 14,
   },
   image: {
-    width: IMAGE_SIZE,
-    height: IMAGE_SIZE,
-    alignSelf: 'center',
+    width: 86,
+    height: 86,
+    borderRadius: 12,
+    resizeMode: 'cover',
   },
   imageOutOfStock: {
     opacity: 0.5,
   },
-  save: {
-    position: 'absolute',
-    top: -SAVE_CARD_HEIGHT,
-  },
   outOfStockBadge: {
     position: 'absolute',
-    top: 8,
-    left: 0,
-    right: 0,
-    backgroundColor: colors.error + 'DD',
-    paddingVertical: 6,
-    paddingHorizontal: 12,
+    top: 4,
+    left: 4,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 6,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   outOfStockText: {
-    color: colors.light,
+    color: '#FFF',
+    fontSize: 10,
     fontWeight: 'bold',
-    fontSize: 12,
-    textTransform: 'uppercase',
+  },
+  infoContainer: {
+    flex: 1,
+    justifyContent: 'space-between',
+    paddingVertical: 2,
   },
   name: {
-    marginTop: 8,
-    marginBottom: 24,
+    fontSize: 16,
+    fontWeight: '600',
+    lineHeight: 22,
+    marginBottom: 4,
+  },
+  bottomRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
   },
   price: {
-    color: colors.primary,
+    fontSize: 17,
+    fontWeight: '700',
   },
-  priceOld: {
-    marginTop: 4,
-    textDecorationLine: 'line-through',
-    color: colors.tertiaryText,
+  oldPrice: {
+    fontSize: 13,
+    color: '#888',
   },
-  button: { marginTop: 8 },
   percent: {
-    color: colors.error,
+    fontWeight: '600',
   },
+  addButton: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 2,
+  },
+  addButtonDisabled: {
+    opacity: 0.5,
+    shadowOpacity: 0,
+    elevation: 0,
+  }
 });
 
 ProductItem.propTypes = {

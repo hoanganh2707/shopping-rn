@@ -70,6 +70,13 @@ export const AdminPanel = () => {
       },
     },
     {
+      icon: 'image',
+      label: t('adminPanelScreen.banners') || 'Banners',
+      onPress: () => {
+        navigation.navigate('BannerList');
+      },
+    },
+    {
       icon: 'logout',
       label: t('adminPanelScreen.logout'),
       onPress: () => handleLogout(),

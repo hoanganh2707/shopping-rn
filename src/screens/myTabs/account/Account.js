@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, ScrollView, SectionList, StyleSheet, View } from 'react-native';
+import { Alert, ScrollView, SectionList, StyleSheet, Switch, View } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
@@ -9,12 +9,14 @@ import { authApi } from '~/apis';
 import { ListItem } from '~/components';
 import { ROLES, SCREENS } from '~/constants';
 import { authActions, selectRole, selectUser } from '~/redux';
+import { useTheme } from '~/config/ThemeContext';
 import { Header, UserCard } from './components';
 
 export const Account = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const { isDark, toggleTheme, colors } = useTheme();
 
   const user = useSelector(selectUser);
   const role = useSelector(selectRole);
@@ -38,6 +40,35 @@ export const Account = () => {
           },
         },
         {
+          icon: 'heart',
+          title: t('wishlist') || 'Danh sách yêu thích',
+          onPress: () => {
+            navigation.navigate(SCREENS.WISHLIST);
+          },
+        },
+        {
+          icon: 'home',
+          title: t('addressBook') || 'Sổ địa chỉ',
+          onPress: () => {
+            if (role === ROLES.USER) {
+              navigation.navigate(SCREENS.ADDRESS_BOOK);
+            } else {
+              navigateToLogin();
+            }
+          },
+        },
+        {
+          icon: 'star',
+          title: t('rewardPoints') || 'Điểm thưởng',
+          onPress: () => {
+            if (role === ROLES.USER) {
+              navigation.navigate(SCREENS.REWARD_POINTS);
+            } else {
+              navigateToLogin();
+            }
+          },
+        },
+        {
           icon: 'message',
           title: t('myCommentList'),
           onPress: () => {
@@ -55,12 +86,22 @@ export const Account = () => {
             navigation.navigate(SCREENS.CHATBOT);
           },
         },
+      ],
+    },
+    {
+      data: [
         {
-          icon: 'heart',
-          title: t('wishlist') || 'Danh sách yêu thích',
-          onPress: () => {
-            navigation.navigate(SCREENS.WISHLIST);
-          },
+          icon: 'notification',
+          title: t('darkMode') || 'Dark Mode',
+          rightComponent: (
+            <Switch
+              value={isDark}
+              onValueChange={toggleTheme}
+              trackColor={{ false: '#ccc', true: colors.primary }}
+              thumbColor={isDark ? '#fff' : '#f4f4f4'}
+            />
+          ),
+          onPress: toggleTheme,
         },
         {
           icon: 'language',
@@ -126,7 +167,7 @@ export const Account = () => {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
       {role === ROLES.USER ? (
         <UserCard user={user} onPress={navigateToUserInfo} />
       ) : (
@@ -143,6 +184,7 @@ export const Account = () => {
               title={item.title}
               bottomDivider={item.bottomDivider ?? true}
               onPress={item.onPress}
+              rightComponent={item.rightComponent}
             />
           );
         }}

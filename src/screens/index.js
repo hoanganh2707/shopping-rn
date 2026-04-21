@@ -21,3 +21,6 @@ export * from './userRating';
 export * from './users';
 export * from './myCommentList';
 export * from './wishlist';
+export * from './addressBook';
+export * from './rewardPoints';
+export * from './orderTracking';

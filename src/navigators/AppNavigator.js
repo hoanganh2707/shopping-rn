@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { ROLES, SCREENS } from '~/constants';
 import { selectRole } from '~/redux';
+import { useTheme } from '~/config/ThemeContext';
 import {
   AdminPanel,
   Cart,
@@ -40,9 +41,12 @@ import {
   UserList,
   UserRating,
   Wishlist,
+  AddressBook,
+  RewardPoints,
+  OrderTracking,
+  BannerList,
 } from '~/screens';
 
-import { colors } from '~/styles';
 import { MyTabs } from './MyTabs';
 import { navigationRef } from './navigationService';
 
@@ -50,12 +54,17 @@ const Stack = createStackNavigator();
 
 export const AppNavigator = () => {
   const role = useSelector(selectRole);
+  const { colors, isDark } = useTheme();
 
   const navTheme = {
-    dark: false,
+    dark: isDark,
     colors: {
       ...DefaultTheme.colors,
       background: colors.background,
+      card: colors.surface,
+      text: colors.primaryText || colors.text,
+      border: colors.border,
+      primary: colors.primary,
     },
   };
 
@@ -76,6 +85,7 @@ export const AppNavigator = () => {
       <Stack.Screen name={SCREENS.CHART} component={Chart} />
       <Stack.Screen name={SCREENS.ORDER_EDIT} component={OrderEdit} />
       <Stack.Screen name={SCREENS.COMMENT_REPLY} component={CommentReply} />
+      <Stack.Screen name="BannerList" component={BannerList} />
     </>,
   ];
 
@@ -148,6 +158,18 @@ export const AppNavigator = () => {
             <Stack.Screen
               name={SCREENS.WISHLIST}
               component={Wishlist}
+            />
+            <Stack.Screen
+              name={SCREENS.ADDRESS_BOOK}
+              component={AddressBook}
+            />
+            <Stack.Screen
+              name={SCREENS.REWARD_POINTS}
+              component={RewardPoints}
+            />
+            <Stack.Screen
+              name={SCREENS.ORDER_TRACKING}
+              component={OrderTracking}
             />
           </Stack.Group>
         )}
