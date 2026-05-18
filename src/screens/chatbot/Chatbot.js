@@ -1,6 +1,6 @@
 /**
  * Chatbot Screen
- * Tích hợp OpenAI để hỏi đáp, tìm kiếm sản phẩm và đặt hàng
+ * Tích hợp Gemini AI để hỏi đáp, tìm kiếm sản phẩm và đặt hàng
  */
 
 import React, { useEffect, useState, useRef } from 'react';
@@ -92,7 +92,7 @@ const Chatbot = () => {
         content: typeof msg.content === 'string' ? msg.content : JSON.stringify(msg.content),
       }));
 
-      // Gọi OpenAI API
+      // Gọi Gemini AI API
       const response = await sendChatMessage(
         userMessage,
         recentMessages,
@@ -204,7 +204,7 @@ const Chatbot = () => {
         const errorMessage = {
           id: (Date.now() + 1).toString(),
           role: 'assistant',
-          content: 'Xin lỗi, tôi đang gặp sự cố kỹ thuật. Vui lòng thử lại sau hoặc kiểm tra cấu hình OpenAI API key.',
+          content: 'Xin lỗi, tôi đang gặp sự cố kỹ thuật. Vui lòng thử lại sau hoặc kiểm tra cấu hình Gemini API key.',
           timestamp: new Date(),
         };
         setMessages((prev) => [...prev, errorMessage]);

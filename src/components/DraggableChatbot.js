@@ -85,7 +85,7 @@ export const DraggableChatbot = () => {
       ]}
     >
       <Pressable onPress={handlePress} style={styles.button}>
-        <Icon name="aliwangwang-o1" size={32} color="#fff" />
+        <Icon name="chatbot" size={32} color="#fff" />
       </Pressable>
     </Animated.View>
   );
